@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { problem1, problem2 } from "./problems.js";
+import styles from "./styles.module.css";
 
-export default function MultipleChoice() {
-  const [answers, setAnswers] = useState(problem1.answers);
+export default function MultipleChoice({ problem }) {
+  const [answers, setAnswers] = useState(problem.answers);
   const [response, setResponse] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,11 +13,9 @@ export default function MultipleChoice() {
       return answer.selected === true;
     });
     if (selectedAnswer.correct === true) {
-      console.log("correct");
       setResponse("Correct!");
+      setDisabled(true);
     } else {
-      console.log("try again");
-      // turn the label element red for incorrect submission
       setResponse("Try again.");
     }
   };
@@ -31,7 +30,7 @@ export default function MultipleChoice() {
       }
     });
     setAnswers(newArr);
-    console.log(answers);
+    setResponse("");
   };
 
   const showAnswers = answers.map((answer, index) => {
@@ -45,28 +44,56 @@ export default function MultipleChoice() {
           onClick={() => {
             handleClick(index);
           }}
+          disabled={disabled}
         />
         <label htmlFor={index}>{answer.text}</label>
       </div>
     );
   });
 
+  const responseStyle = {
+    marginBottom: "0px",
+    marginLeft: "20px",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    display:
+      response === "Correct!"
+        ? "block"
+        : response === "Try again."
+        ? "block"
+        : response === ""
+        ? "none"
+        : "none",
+    backgroundColor:
+      response === "Correct!"
+        ? "green"
+        : response === "Try again."
+        ? "#dc3545"
+        : response === ""
+        ? "none"
+        : "none",
+    color: "white",
+    fontWeight: "bold",
+    borderRadius: "5px",
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <legend>{problem1.question}</legend>
+          <p style={{ marginBottom: "10px" }}>{problem.question}</p>
           {showAnswers}
-          <input type="submit" />
-          <p>{response}</p>
+          <div
+            style={{ display: "flex", flexDirection: "row", marginTop: "10px" }}
+          >
+            <input type="submit" className={styles.input} />
+            <p style={responseStyle}>{response}</p>
+          </div>
         </fieldset>
       </form>
     </div>
   );
 }
 
-// if the correct answer is selected on submit, set the label background colour to green
-
-// Answers
-// - when you submit the form, there's a value: option="Sweet man"; if you don't include a value, it would say option=on
-// - use appearance: none on the radio to omit the style and add your own
+// restyle Try Again
+// restyle button to "Correct" button when correct answer is chosen

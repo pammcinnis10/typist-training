@@ -1,0 +1,18 @@
+input[type="submit"] {
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  background-color: #0066ff;
+  font-weight: bold;
+}
+
+input[type="submit"]:hover {
+  background-color: #004ab8;
+}
+
+fieldset {
+  border: 2px solid #b7b4b4;
+  border-radius: 5px;
+}

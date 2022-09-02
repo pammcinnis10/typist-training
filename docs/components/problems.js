@@ -1,19 +1,53 @@
 export const problem1 = {
-  question: "Who is Matthew?",
+  question:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas felis?",
   answers: [
-    { text: "Sweet man", correct: true, selected: false },
-    { text: "Alligator", correct: false, selected: false },
-    { text: "Tropical tree", correct: false, selected: false },
-    { text: "Shoemaker", correct: false, selected: false },
+    {
+      text: "Duis sit amet libero tempor, vehicula dui at, pellentesque elit.",
+      correct: true,
+      selected: false,
+    },
+    {
+      text: "Proin quam ligula, cursus in massa et, convallis elementum felis.",
+      correct: false,
+      selected: false,
+    },
+    {
+      text: "Quisque pulvinar sit amet libero vitae scelerisque.",
+      correct: false,
+      selected: false,
+    },
+    {
+      text: "Fusce vel purus vestibulum, dapibus ipsum id.",
+      correct: false,
+      selected: false,
+    },
   ],
 };
 
 export const problem2 = {
-  question: "Who is Matthew?",
+  question:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas felis?",
   answers: [
-    { text: "Sweet man", correct: true, selected: false },
-    { text: "Alligator", correct: false, selected: false },
-    { text: "Tropical tree", correct: false, selected: false },
-    { text: "Shoemaker", correct: false, selected: false },
+    {
+      text: "Duis sit amet libero tempor, vehicula dui at, pellentesque elit.",
+      correct: true,
+      selected: false,
+    },
+    {
+      text: "Proin quam ligula, cursus in massa et, convallis elementum felis.",
+      correct: false,
+      selected: false,
+    },
+    {
+      text: "Quisque pulvinar sit amet libero vitae scelerisque.",
+      correct: false,
+      selected: false,
+    },
+    {
+      text: "Fusce vel purus vestibulum, dapibus ipsum id.",
+      correct: false,
+      selected: false,
+    },
   ],
 };
