@@ -13,6 +13,6 @@ input[type="submit"]:hover {
 }
 
 fieldset {
-  border: 2px solid #b7b4b4;
+  border: 1px solid #b7b4b4;
   border-radius: 5px;
 }

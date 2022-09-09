@@ -16,7 +16,7 @@ export default function MultipleChoice({ problem }) {
       setResponse("Correct!");
       setDisabled(true);
     } else {
-      setResponse("Try again.");
+      setResponse("Try again");
     }
   };
 
@@ -59,7 +59,7 @@ export default function MultipleChoice({ problem }) {
     display:
       response === "Correct!"
         ? "block"
-        : response === "Try again."
+        : response === "Try again"
         ? "block"
         : response === ""
         ? "none"
@@ -67,12 +67,19 @@ export default function MultipleChoice({ problem }) {
     backgroundColor:
       response === "Correct!"
         ? "green"
-        : response === "Try again."
-        ? "#dc3545"
+        : response === "Try again"
+        ? "none"
         : response === ""
         ? "none"
         : "none",
-    color: "white",
+    color:
+      response === "Correct!"
+        ? "white"
+        : response === "Try again"
+        ? "red"
+        : response === ""
+        ? "none"
+        : "none",
     fontWeight: "bold",
     borderRadius: "5px",
   };
@@ -95,5 +102,4 @@ export default function MultipleChoice({ problem }) {
   );
 }
 
-// restyle Try Again
 // restyle button to "Correct" button when correct answer is chosen
