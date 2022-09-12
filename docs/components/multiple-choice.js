@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 
 export default function MultipleChoice({ problem }) {
   const [answers, setAnswers] = useState(problem.answers);
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const handleSubmit = (e) => {
@@ -13,10 +13,10 @@ export default function MultipleChoice({ problem }) {
       return answer.selected === true;
     });
     if (selectedAnswer.correct === true) {
-      setResponse("Correct!");
+      setResponse(true);
       setDisabled(true);
     } else {
-      setResponse("Try again");
+      setResponse(false);
     }
   };
 
@@ -30,7 +30,6 @@ export default function MultipleChoice({ problem }) {
       }
     });
     setAnswers(newArr);
-    setResponse("");
   };
 
   const showAnswers = answers.map((answer, index) => {
@@ -56,30 +55,6 @@ export default function MultipleChoice({ problem }) {
     marginLeft: "20px",
     paddingLeft: "5px",
     paddingRight: "5px",
-    display:
-      response === "Correct!"
-        ? "block"
-        : response === "Try again"
-        ? "block"
-        : response === ""
-        ? "none"
-        : "none",
-    backgroundColor:
-      response === "Correct!"
-        ? "green"
-        : response === "Try again"
-        ? "none"
-        : response === ""
-        ? "none"
-        : "none",
-    color:
-      response === "Correct!"
-        ? "white"
-        : response === "Try again"
-        ? "red"
-        : response === ""
-        ? "none"
-        : "none",
     fontWeight: "bold",
     borderRadius: "5px",
   };
@@ -94,7 +69,7 @@ export default function MultipleChoice({ problem }) {
             style={{ display: "flex", flexDirection: "row", marginTop: "10px" }}
           >
             <input type="submit" className={styles.input} />
-            <p style={responseStyle}>{response}</p>
+            <p style={responseStyle}>{response ? "Correct" : ""}</p>
           </div>
         </fieldset>
       </form>
