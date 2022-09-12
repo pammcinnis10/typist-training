@@ -1,24 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./styles.module.css";
+import Question from "./question.js";
+import Incorrect from "./incorrect.js";
+import Correct from "./correct.js";
+import Submit from "./submit.js";
 
 export default function MultipleChoice({ problem }) {
   const [answers, setAnswers] = useState(problem.answers);
-  const [response, setResponse] = useState(false);
+  const [results, setResults] = useState({
+    showResult: false,
+    correct: false,
+  });
   const [disabled, setDisabled] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let selectedAnswer = answers.find((answer, index) => {
-      return answer.selected === true;
-    });
-    if (selectedAnswer.correct === true) {
-      setResponse(true);
-      setDisabled(true);
-    } else {
-      setResponse(false);
-    }
-  };
 
   const handleClick = (index) => {
     let newArr = [...answers];
@@ -30,51 +24,60 @@ export default function MultipleChoice({ problem }) {
       }
     });
     setAnswers(newArr);
+    setResults({
+      showResult: false,
+      correct: false,
+    });
   };
 
-  const showAnswers = answers.map((answer, index) => {
-    return (
-      <div key={index}>
-        <input
-          type="radio"
-          id={index}
-          name="option"
-          value={answer.text}
-          onClick={() => {
-            handleClick(index);
-          }}
-          disabled={disabled}
-        />
-        <label htmlFor={index}>{answer.text}</label>
-      </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let selectedAnswer = answers.find(
+      (answer, index) => answer.selected === true
     );
-  });
-
-  const responseStyle = {
-    marginBottom: "0px",
-    marginLeft: "20px",
-    paddingLeft: "5px",
-    paddingRight: "5px",
-    fontWeight: "bold",
-    borderRadius: "5px",
+    if (selectedAnswer.correct === true) {
+      setResults({
+        showResult: true,
+        correct: true,
+      });
+    } else {
+      setResults({
+        showResult: true,
+        correct: false,
+      });
+    }
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <fieldset>
-          <p style={{ marginBottom: "10px" }}>{problem.question}</p>
-          {showAnswers}
+        <fieldset disabled={disabled}>
+          <Question
+            problem={problem}
+            answers={answers}
+            handleClick={handleClick}
+          />
           <div
             style={{ display: "flex", flexDirection: "row", marginTop: "10px" }}
           >
-            <input type="submit" className={styles.input} />
-            <p style={responseStyle}>{response ? "Correct" : ""}</p>
+            {results.correct === false && results.showResult === false ? (
+              <Submit />
+            ) : results.correct === false && results.showResult === true ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginTop: "10px",
+                }}
+              >
+                <Submit /> <Incorrect />
+              </div>
+            ) : (
+              <Correct />
+            )}
           </div>
         </fieldset>
       </form>
     </div>
   );
 }
-
-// restyle button to "Correct" button when correct answer is chosen
