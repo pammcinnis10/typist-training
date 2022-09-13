@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export default function Question({ problem, answers, handleClick }) {
+export default function Question({ question, answers, handleClick }) {
   const showAnswers = answers.map((answer, index) => {
     return (
       <div key={index}>
@@ -21,7 +21,7 @@ export default function Question({ problem, answers, handleClick }) {
 
   return (
     <div>
-      <p style={{ marginBottom: "10px" }}>{problem.question}</p>
+      <p style={{ marginBottom: "10px" }}>{question}</p>
       {showAnswers}
     </div>
   );

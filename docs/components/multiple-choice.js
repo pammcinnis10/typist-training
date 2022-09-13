@@ -1,13 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import styles from "./styles.module.css";
 import Question from "./question.js";
-import Incorrect from "./incorrect.js";
-import Correct from "./correct.js";
-import Submit from "./submit.js";
+import SubmitButton from "./submitbutton.js";
 
-export default function MultipleChoice({ problem }) {
-  const [answers, setAnswers] = useState(problem.answers);
+export default function MultipleChoice({ question, answerList }) {
+  const [answers, setAnswers] = useState(answerList);
   const [results, setResults] = useState({
     showResult: false,
     correct: false,
@@ -40,6 +37,7 @@ export default function MultipleChoice({ problem }) {
         showResult: true,
         correct: true,
       });
+      setDisabled(true);
     } else {
       setResults({
         showResult: true,
@@ -53,29 +51,11 @@ export default function MultipleChoice({ problem }) {
       <form onSubmit={handleSubmit}>
         <fieldset disabled={disabled}>
           <Question
-            problem={problem}
+            question={question}
             answers={answers}
             handleClick={handleClick}
           />
-          <div
-            style={{ display: "flex", flexDirection: "row", marginTop: "10px" }}
-          >
-            {results.correct === false && results.showResult === false ? (
-              <Submit />
-            ) : results.correct === false && results.showResult === true ? (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  marginTop: "10px",
-                }}
-              >
-                <Submit /> <Incorrect />
-              </div>
-            ) : (
-              <Correct />
-            )}
-          </div>
+          <SubmitButton results={results} />
         </fieldset>
       </form>
     </div>

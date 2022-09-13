@@ -9,4 +9,7 @@ import { problem1, problem2 } from "../components/problems.js";
 
 You've discovered Pam's super hackey yet-to-be-functioning multiple choice component. Lucky you!
 
-<MultipleChoice problem={problem1}></MultipleChoice>
+<MultipleChoice
+  question={problem1.question}
+  answerList={problem1.answers}
+></MultipleChoice>
