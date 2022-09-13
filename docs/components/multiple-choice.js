@@ -6,11 +6,14 @@ import SubmitButton from "./submitbutton.js";
 export default function MultipleChoice({ question, answerList }) {
   const [answers, setAnswers] = useState(answerList);
   const [results, setResults] = useState({
-    showResult: false,
-    correct: false,
+    // tracks whether form was submitted and the correct answer was selected
+    formSubmitted: false,
+    correctSelected: false,
   });
-  const [disabled, setDisabled] = useState(false);
+  const [formDisabled, setFormDisabled] = useState(false);
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
+  // updates state to record the selected answer, and record that the form is not submitted
   const handleClick = (index) => {
     let newArr = [...answers];
     answers.map((selectedAnswer, selectedIndex) => {
@@ -22,11 +25,13 @@ export default function MultipleChoice({ question, answerList }) {
     });
     setAnswers(newArr);
     setResults({
-      showResult: false,
-      correct: false,
+      formSubmitted: false,
+      correctSelected: false,
     });
+    setSubmitButtonDisabled(false);
   };
 
+  // updates state to indicate form has been submitted, finds the selected answer and if correct, updates state to correct answer selected, and disables form
   const handleSubmit = (e) => {
     e.preventDefault();
     let selectedAnswer = answers.find(
@@ -34,14 +39,14 @@ export default function MultipleChoice({ question, answerList }) {
     );
     if (selectedAnswer.correct === true) {
       setResults({
-        showResult: true,
-        correct: true,
+        formSubmitted: true,
+        correctSelected: true,
       });
-      setDisabled(true);
+      setFormDisabled(true);
     } else {
       setResults({
-        showResult: true,
-        correct: false,
+        formSubmitted: true,
+        correctSelected: false,
       });
     }
   };
@@ -49,13 +54,18 @@ export default function MultipleChoice({ question, answerList }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <fieldset disabled={disabled}>
+        <fieldset disabled={formDisabled}>
           <Question
             question={question}
             answers={answers}
             handleClick={handleClick}
           />
-          <SubmitButton results={results} />
+          {/* displays submit button and/or message dependent on whether form submitted and correct answer selected */}
+          <SubmitButton
+            formSubmitted={results.formSubmitted}
+            correctSelected={results.correctSelected}
+            disabled={submitButtonDisabled}
+          />
         </fieldset>
       </form>
     </div>

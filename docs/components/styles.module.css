@@ -1,3 +1,5 @@
+/* styles for the submit button, and the correct and incorrect responses displayed when form is submitted */
+
 input[type="submit"] {
   padding: 6px 10px 6px 10px;
   border-radius: 5px;
@@ -10,6 +12,10 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #004ab8;
+}
+
+input[type="submit"]:disabled {
+  background-color: #b5b5b5;
 }
 
 fieldset {

@@ -1,3 +1,5 @@
+// multiple choice questions and answers saved in objects. Need to be imported to the md/mdx page where the components appear.
+
 export const problem1 = {
   question:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas felis?",
